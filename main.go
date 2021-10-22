@@ -60,11 +60,20 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// A really hacky ugly way to fix nickname issues
 	message := strings.Replace(m.Content, "!", "", -1)
 
+	if strings.Contains(message, s.State.User.Mention()) && strings.Contains(message, "invite") {
+		_, err := s.ChannelMessageSend(m.ChannelID, m.Author.Mention() + " let me yell at your friends with https://discord.com/api/oauth2/authorize?client_id=901108741318000692&permissions=0&scope=bot")
+		if err != nil {
+			log.Fatal(err)
+		}
+		return
+	}
+
 	if strings.Contains(message, s.State.User.Mention()) {
 		_, err := s.ChannelMessageSend(m.ChannelID, m.Author.Mention() + " " + generateInsult())
 		if err != nil {
 			log.Fatal(err)
 		}
+		return
 	}
 }
 
