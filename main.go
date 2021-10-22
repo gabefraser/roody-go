@@ -34,6 +34,7 @@ func main() {
 		os.Exit(1)
 	}
 
+	dg.AddHandler(onReady)
 	dg.AddHandler(messageCreate)
 
 	dg.Identify.Intents = discordgo.IntentsGuildMessages
@@ -50,6 +51,10 @@ func main() {
 	<-sc
 
 	dg.Close()
+}
+
+func onReady(s *discordgo.Session, event * discordgo.Ready) {
+	s.UpdateGameStatus(0, "i fucking dare you to 'invite' me to your server")
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
