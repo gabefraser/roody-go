@@ -10,6 +10,12 @@ Clone this repository and compile with your operating system of choice
 go build main.go
 ```
 
+Make sure to generate your bot token and assign it as the `-t` value when starting
+
+```
+main -t <BOT_TOKEN>
+```
+
 ### Credits
 
 ```
